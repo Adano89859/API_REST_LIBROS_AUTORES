@@ -3,6 +3,8 @@ package com.Libros_Autores.Libros_Autores.Model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Autor")
 public class Autor {
@@ -23,10 +25,17 @@ public class Autor {
      * Creamos una lista que llame al modelo Libro con una
      * variable identificativa llamada libros.
      * 
-     * La lista se encuentra en una columna dentro de la tabla autores (Revisar)
+     * (Revisar)
+     * Usamos @JsonManagedReference y @JsonBackReference para evitar
+     * que en las consultas JSON haya bucles infinitos y marcar la relación
+     * entre el autor y el libro, también evita que aparezca un error llamado StackOverflowError
+     * 
+     * @JsonManagedReference Señala al padre de la relación, un autor puede tener varios libros
+     * @JsonBackReference Señala al hijo de la relación, un libro pertenece a un único autor
     */
-    @OneToMany(mappedBy = "Autor")
-    @Column(name = "libros")
+
+    @OneToMany(mappedBy = "autor")
+    @JsonManagedReference
     private List<Libro> libros;
 
     // CONSTRUCTOR SIN PARÁMETROS

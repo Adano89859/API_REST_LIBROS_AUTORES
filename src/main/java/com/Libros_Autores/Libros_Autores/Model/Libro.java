@@ -1,5 +1,7 @@
 package com.Libros_Autores.Libros_Autores.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,8 +21,28 @@ public class Libro {
     private int anioPublicacion;
 
     //Revisar este en concreto cuando se haya creado el de "usuario"
+
+    /**
+     * Relación Muchos a uno
+     * Uno o varios libros pertenecen a un autor
+     * 
+     * Usamos el @JoinColumn para marcar la foregn key de la tabla libros
+     * que es el autor_id
+     * 
+     * Llamamos al modelo de Autor mediante una variable identificativa llamada
+     * autor
+     * 
+     * (Revisar)
+     * Usamos @JsonManagedReference y @JsonBackReference para evitar
+     * que en las consultas JSON haya bucles infinitos y marcar la relación
+     * entre el autor y el libro, también evita que aparezca un error llamado StackOverflowError
+     * 
+     * @JsonManagedReference Señala al padre de la relación, un autor puede tener varios libros
+     * @JsonBackReference Señala al hijo de la relación, un libro pertenece a un único autor 
+    */
     @ManyToOne
     @JoinColumn(name = "autor_id")
+    @JsonBackReference
     private Autor autor;
 
     //CONSTRUCTOR
