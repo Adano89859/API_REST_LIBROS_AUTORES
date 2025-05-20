@@ -1,7 +1,7 @@
-package com.Libros_Autores.Libros_Autores.controller;
+package com.Libros_Autores.Libros_Autores.Controller;
 
 import com.Libros_Autores.Libros_Autores.Model.Autor;
-import com.Libros_Autores.Libros_Autores.service.AutorService;
+import com.Libros_Autores.Libros_Autores.Service.AutorService;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
