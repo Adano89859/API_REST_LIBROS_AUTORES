@@ -52,7 +52,17 @@ public class LibroController {
         libroService.delete(ID);
     }
 
-    //GET de buscar
+    //GET de BUSCAR
+    @GetMapping("/buscar")
+    public List<Libro> buscarLibros
+    (@RequestParam(required = false) String titulo,
+     @RequestParam(required = false) int anioPublicacion,
+     @RequestParam(required = false) String sortBy,
+     @RequestParam(required = false) String orden){
+
+        return libroService.buscarLibos(titulo, anioPublicacion, sortBy, orden);
+    }
+
 
 
 }
