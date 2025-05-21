@@ -1,4 +1,4 @@
-package com.Libros_Autores.Libros_Autores.service;
+package com.Libros_Autores.Libros_Autores.Service;
 
 import com.Libros_Autores.Libros_Autores.Model.Autor;
 import com.Libros_Autores.Libros_Autores.Repository.AutorRepositoy;
