@@ -2,6 +2,7 @@ package com.Libros_Autores.Libros_Autores.Controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import com.Libros_Autores.Libros_Autores.Model.Autor;
 import com.Libros_Autores.Libros_Autores.Model.Libro;
@@ -27,8 +28,10 @@ public class LibroController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public void getLibroID(@PathVariable Long ID) {
-        libroService.find(ID);
+    public Optional<Libro> getLibroID(@PathVariable("id") Long ID) {
+        Optional<Libro> libro = libroService.find(ID);
+        //Añado el responseEntity para que no de errores en el postman
+        return ResponseEntity.ok(libro).getBody();
     }
 
     @PostMapping
@@ -37,7 +40,7 @@ public class LibroController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Libro> updatelibro(@PathVariable Long id, @RequestBody Libro libro) {
+    public ResponseEntity<Libro> updatelibro(@PathVariable("id") Long id, @RequestBody Libro libro) {
 
         try {
             Libro updated = libroService.updateLibro(libro, id);
@@ -48,7 +51,7 @@ public class LibroController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteLibro(@PathVariable Long ID){
+    public void deleteLibro(@PathVariable("id") Long ID){
         libroService.delete(ID);
     }
 
@@ -56,9 +59,9 @@ public class LibroController {
     @GetMapping("/buscar")
     public List<Libro> buscarLibros
     (@RequestParam(required = false) String titulo,
-     @RequestParam(required = false) int anioPublicacion,
-     @RequestParam(required = false) String sortBy,
-     @RequestParam(required = false) String orden){
+     @RequestParam(required = false) Integer anioPublicacion,
+     @RequestParam(defaultValue = "id") String sortBy,
+     @RequestParam(defaultValue = "asc") String orden){
 
         return libroService.buscarLibos(titulo, anioPublicacion, sortBy, orden);
     }

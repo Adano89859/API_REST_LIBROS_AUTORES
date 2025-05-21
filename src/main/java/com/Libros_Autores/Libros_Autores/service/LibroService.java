@@ -19,7 +19,7 @@ public class LibroService {
 
         public List<Libro> listAll() {return libroRepository.findAll(); }
         public Libro save(Libro libro) {return libroRepository.save(libro); }
-        public void find(Long ID) {libroRepository.findById(ID); }
+        public Optional<Libro> find(Long ID) {return libroRepository.findById(ID); }
         public void delete(Long ID) {libroRepository.deleteById(ID);}
 
         public Libro updateLibro(Libro updatedlibro, Long id) {
@@ -40,13 +40,13 @@ public class LibroService {
         }
 
         //Método que será usado en "Buscar"
-        public List<Libro> buscarLibos(String titulo, int anioPublicacion, String sortBy, String orden){
+        public List<Libro> buscarLibos(String titulo, Integer anioPublicacion, String sortBy, String orden){
 
                 //Creo la variable sort que servirá para el orden
                 Sort mostrarOrden;
 
-                //Uso el String "orden" para saber de qué manera los voy a ordenar
-                if(orden.equals("desc")){
+                //Uso el String "orden" para saber de qué manera los voy a ordenar; el "IgnoreCase" es para que no me de error si es null
+                if(orden.equalsIgnoreCase("desc")){
                         //Ordeno de forma descendente
                         mostrarOrden = Sort.by(sortBy).descending();
                 }else{
@@ -55,11 +55,11 @@ public class LibroService {
                 }
 
                 //Filtro según los parametros de busqueda mete el usuario
-                if(titulo != null && anioPublicacion >0){
+                if(titulo != null && anioPublicacion != null){
                         return libroRepository.findByTituloAndAnioPublicacion(titulo, anioPublicacion, mostrarOrden);
                 } else if(titulo != null){
                         return libroRepository.findByTitulo(titulo,mostrarOrden);
-                } else if(anioPublicacion >0){
+                } else if(anioPublicacion != null){
                         return libroRepository.findByAnioPublicacion(anioPublicacion,mostrarOrden);
                 }else{
                         return libroRepository.findAll(mostrarOrden);

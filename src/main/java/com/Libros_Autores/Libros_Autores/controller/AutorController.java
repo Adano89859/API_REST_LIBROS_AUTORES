@@ -29,7 +29,7 @@ public class AutorController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public void getAutorID(@PathVariable Long ID) {
+    public void getAutorID(@PathVariable("id") Long ID) {
         autorService.find(ID);
     }
 
@@ -40,7 +40,7 @@ public class AutorController {
     
 
     @DeleteMapping("/{id}")
-    public void deleteAutor(@PathVariable Long ID){
+    public void deleteAutor(@PathVariable("id") Long ID){
         autorService.delete(ID);
     }
 }
