@@ -10,7 +10,7 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     //Para encontrar libros en base a su título
     List<Libro> findByTitulo(String titulo, Sort sort);
     //Para encontrar el libro en base al año de publicación
-    List<Libro> findByAnioPublicacion(int anioPublicacion, Sort sort);
+    List<Libro> findByAnioPublicacion(Integer anioPublicacion, Sort sort);
     //Para encontrar mediante título y año de publicación
-    List<Libro> findByTituloAndAnioPublicacion(String titulo, int anioPublicacion, Sort sort);
+    List<Libro> findByTituloAndAnioPublicacion(String titulo, Integer anioPublicacion, Sort sort);
 }

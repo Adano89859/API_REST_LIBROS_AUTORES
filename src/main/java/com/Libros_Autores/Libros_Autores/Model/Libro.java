@@ -18,7 +18,7 @@ public class Libro {
     @Column(name = "isbn")
     private String isbn;
     @Column(name = "anioPublicacion")
-    private int anioPublicacion;
+    private Integer anioPublicacion;
 
     /**
      * Relación Muchos a uno
@@ -46,7 +46,7 @@ public class Libro {
     //CONSTRUCTOR
     public Libro(){}
 
-    public Libro(Long id, String titulo, String isbn, int anioPublicacion, Autor autor){
+    public Libro(Long id, String titulo, String isbn, Integer anioPublicacion, Autor autor){
         this.id = id;
         this.titulo = titulo;
         this.isbn = isbn;
@@ -64,11 +64,11 @@ public class Libro {
         this.autor = autor;
     }
 
-    public int getAnioPublicacion() {
+    public Integer getAnioPublicacion() {
         return anioPublicacion;
     }
 
-    public void setAnioPublicacion(int anioPublicacion) {
+    public void setAnioPublicacion(Integer anioPublicacion) {
         this.anioPublicacion = anioPublicacion;
     }
 
