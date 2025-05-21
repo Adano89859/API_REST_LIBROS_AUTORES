@@ -19,21 +19,6 @@ public class Autor {
     @Column(name = "nacionalidad")
     private String nacionalidad;
 
-    /**
-     * Relación uno a muchos
-     * Un autor puede escribir muchos libros
-     * Creamos una lista que llame al modelo Libro con una
-     * variable identificativa llamada libros.
-     * 
-     * (Revisar)
-     * Usamos @JsonManagedReference y @JsonBackReference para evitar
-     * que en las consultas JSON haya bucles infinitos y marcar la relación
-     * entre el autor y el libro, también evita que aparezca un error llamado StackOverflowError
-     * 
-     * @JsonManagedReference Señala al padre de la relación, un autor puede tener varios libros
-     * @JsonBackReference Señala al hijo de la relación, un libro pertenece a un único autor
-    */
-
     @OneToMany(mappedBy = "autor")
     @JsonManagedReference
     private List<Libro> libros;
